@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import PageWrapper from "@/components/safepark/PageWrapper";
 import BottomNav from "@/components/safepark/BottomNav";
+import UserHeader from "@/components/safepark/UserHeader";
 import GhostButton from "@/components/safepark/GhostButton";
 import { useSessionStore, ParkingSession, SessionStatus } from "@/stores/useSessionStore";
 import { Clock, Download, MapPin, Car, Timer, ChevronRight, Inbox } from "lucide-react";
@@ -74,6 +75,7 @@ const ParkingHistory = () => {
   return (
     <>
       <PageWrapper className="pb-24 space-y-5">
+        <UserHeader />
         <h1 className="text-title text-foreground">Parking History</h1>
 
         {/* Date chips */}

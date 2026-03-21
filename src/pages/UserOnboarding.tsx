@@ -24,7 +24,9 @@ const UserOnboarding = () => {
         <button onClick={() => navigate(-1)} className="text-sp-text-secondary">
           <ArrowLeft size={22} />
         </button>
-        <span className="font-bold text-foreground text-lg">SafePark</span>
+        <span className="font-bold text-lg text-sp-teal tracking-[0.15em] uppercase">
+          SafePark
+        </span>
         <div className="w-[22px]" />
       </div>
       {currentStep < 5 && <StepBar total={5} current={currentStep} />}

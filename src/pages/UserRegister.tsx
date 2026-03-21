@@ -75,8 +75,10 @@ const UserRegister = () => {
         <button onClick={() => navigate("/login")} className="text-sp-text-secondary">
           <ArrowLeft size={22} />
         </button>
-        <span className="font-bold text-foreground text-lg">SafePark</span>
-        <span className="text-sp-teal font-bold text-xs uppercase tracking-widest">Sentinel</span>
+        <span className="font-bold text-lg text-sp-teal tracking-[0.15em] uppercase">
+          SafePark
+        </span>
+        <span className="w-[22px] block" />
       </div>
 
       <StepBar total={5} current={1} />

@@ -4,6 +4,7 @@ import PageWrapper from "@/components/safepark/PageWrapper";
 import BottomNav from "@/components/safepark/BottomNav";
 import PillButton from "@/components/safepark/PillButton";
 import GhostButton from "@/components/safepark/GhostButton";
+import UserHeader from "@/components/safepark/UserHeader";
 import InputField from "@/components/safepark/InputField";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useCarStore, CarEntry } from "@/stores/useCarStore";
@@ -73,6 +74,7 @@ const UserProfile = () => {
   return (
     <>
       <PageWrapper className="pb-24 space-y-6">
+        <UserHeader />
         {/* Avatar */}
         <div className="flex flex-col items-center gap-3 pt-2">
           <div className="relative">

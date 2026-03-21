@@ -22,7 +22,7 @@ const OwnerOnboarding = () => {
 
   return (
     <PageWrapper className="flex flex-col gap-5">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between">
         <button
           onClick={() => {
             if (stepIndex > 0) navigate(stepPaths[stepIndex - 1]);
@@ -32,12 +32,17 @@ const OwnerOnboarding = () => {
         >
           <ArrowLeft size={22} />
         </button>
+        <span className="font-bold text-lg text-sp-teal tracking-[0.15em] uppercase">
+          SafePark
+        </span>
+        <div className="w-[22px]" />
+      </div>
+
+      <div className="flex items-center gap-3">
         <div className="flex-1">
           <StepBar total={5} current={displayStep} variant="teal" />
         </div>
-        <span className="text-sp-teal font-bold text-xs uppercase tracking-widest">
-          {displayStep}/5
-        </span>
+        <span className="text-sp-teal font-bold text-xs uppercase tracking-widest">{displayStep}/5</span>
       </div>
       <Outlet />
     </PageWrapper>

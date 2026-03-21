@@ -37,6 +37,13 @@ const UserLogin = () => {
 
   return (
     <PageWrapper className="flex flex-col justify-center gap-8">
+      {/* Brand header */}
+      <div className="text-center">
+        <span className="font-bold text-lg text-sp-teal tracking-[0.15em] uppercase">
+          SafePark
+        </span>
+      </div>
+
       {/* Header */}
       <div className="text-center space-y-2">
         <div className="mx-auto w-16 h-16 rounded-card bg-sp-surface flex items-center justify-center mb-4">

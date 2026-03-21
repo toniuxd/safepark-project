@@ -2,12 +2,11 @@ import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import BottomNav from "@/components/safepark/BottomNav";
 import InputField from "@/components/safepark/InputField";
+import UserHeader from "@/components/safepark/UserHeader";
 import { useSessionStore } from "@/stores/useSessionStore";
 import { useLotStore, mockLots } from "@/stores/useLotStore";
 import { useCarStore } from "@/stores/useCarStore";
 import {
-  Menu,
-  User,
   AlertTriangle,
   Search,
   SlidersHorizontal,
@@ -68,20 +67,9 @@ const UserHome = () => {
         </div>
 
         {/* Header overlay */}
-        <header className="relative z-10 flex items-center justify-between px-5 pt-6">
-          <div className="flex items-center gap-3">
-            <Menu className="text-sp-text-secondary" size={22} />
-            <span className="font-bold text-lg text-sp-teal tracking-[0.15em] uppercase">
-              SafePark
-            </span>
-          </div>
-          <button
-            onClick={() => navigate("/profile")}
-            className="w-11 h-11 rounded-full bg-sp-surface border-2 border-sp-teal/30 flex items-center justify-center overflow-hidden"
-          >
-            <User size={18} className="text-sp-text-secondary" />
-          </button>
-        </header>
+        <div className="relative z-10 px-5 pt-6">
+          <UserHeader />
+        </div>
       </div>
 
       {/* Bottom sheet card */}
