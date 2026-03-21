@@ -54,6 +54,7 @@ const ParkingFlow = () => {
 
   const confirm = () => {
     if (!chosenCar) return;
+    const durationMs = [1800000, 3600000, 7200000, 28800000][selectedDuration];
     addSession({
       id: `sess-${Date.now()}`,
       lotId: lot.id,
@@ -66,6 +67,8 @@ const ParkingFlow = () => {
       tax,
       total,
       timestamp: Date.now(),
+      endTime: Date.now() + durationMs,
+      status: "active",
     });
     toast.success("Parking confirmed! You're all set.");
     navigate("/home");
