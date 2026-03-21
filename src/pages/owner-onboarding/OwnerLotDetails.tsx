@@ -41,17 +41,17 @@ const OwnerLotDetails = () => {
       <div className="space-y-4">
         <div>
           <label className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary mb-1.5 block">Lot Name</label>
-          <InputField variant="teal" placeholder="Downtown Garage" value={lotName} onChange={(e) => updateLotDraft({ lotName: e.target.value })} />
+          <InputField variant="teal" placeholder="Downtown Garage" value={lotName} onChange={(e) => updateLotDraft({ lotName: e.target.value })} className="bg-black/25 border-white/10" />
         </div>
 
         <div>
           <label className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary mb-1.5 block">Address</label>
           <div className="relative">
-            <InputField variant="teal" placeholder="123 Main St, City" value={address} onChange={(e) => updateLotDraft({ address: e.target.value })} className="pr-10" />
+            <InputField variant="teal" placeholder="123 Main St, City" value={address} onChange={(e) => updateLotDraft({ address: e.target.value })} className="pr-10 bg-black/25 border-white/10" />
             <MapPin className="absolute right-3 top-1/2 -translate-y-1/2 text-sp-text-secondary" size={18} />
           </div>
           {/* Map placeholder */}
-          <div className="mt-2 h-24 rounded-card bg-sp-surface border border-border flex items-center justify-center text-sp-text-secondary text-xs">
+          <div className="mt-2 h-24 rounded-card bg-black/25 border border-white/10 flex items-center justify-center text-sp-text-secondary text-xs">
             <MapPin size={16} className="mr-1" /> Map preview placeholder
           </div>
         </div>
@@ -61,7 +61,7 @@ const OwnerLotDetails = () => {
           <div className="flex items-center gap-4">
             <button
               onClick={() => updateLotDraft({ totalSpaces: Math.max(1, totalSpaces - 1) })}
-              className="w-12 h-12 rounded-card bg-sp-surface border border-border flex items-center justify-center text-foreground active:scale-95 transition-transform"
+              className="w-12 h-12 rounded-card bg-black/25 border border-white/10 flex items-center justify-center text-foreground active:scale-95 transition-transform"
             >
               <Minus size={18} />
             </button>
@@ -70,7 +70,7 @@ const OwnerLotDetails = () => {
             </span>
             <button
               onClick={() => updateLotDraft({ totalSpaces: totalSpaces + 1 })}
-              className="w-12 h-12 rounded-card bg-sp-surface border border-border flex items-center justify-center text-foreground active:scale-95 transition-transform"
+              className="w-12 h-12 rounded-card bg-black/25 border border-white/10 flex items-center justify-center text-foreground active:scale-95 transition-transform"
             >
               <Plus size={18} />
             </button>
@@ -87,8 +87,8 @@ const OwnerLotDetails = () => {
                 className={cn(
                   "flex-1 py-3 rounded-card text-sm font-semibold transition-colors active:scale-[0.98]",
                   lotType === t.key
-                    ? "bg-sp-teal text-foreground"
-                    : "bg-sp-surface text-sp-text-secondary border border-border"
+                    ? "bg-cyan-300 text-slate-900"
+                    : "bg-black/25 text-sp-text-secondary border border-white/10"
                 )}
               >
                 {t.label}
@@ -110,7 +110,7 @@ const OwnerLotDetails = () => {
                     "aspect-square rounded-card border-2 border-dashed flex flex-col items-center justify-center gap-1 transition-colors active:scale-[0.98]",
                     hasPhoto
                       ? "border-sp-teal bg-sp-teal/10"
-                      : "border-border bg-sp-surface hover:border-sp-teal/50"
+                      : "border-white/10 bg-black/25 hover:border-sp-teal/50"
                   )}
                 >
                   {hasPhoto ? (
@@ -132,7 +132,7 @@ const OwnerLotDetails = () => {
         variant="teal"
         onClick={() => { setStep(3); navigate("/owner/onboarding/hours-pricing"); }}
         disabled={!valid}
-        className="mt-auto"
+        className="mt-auto h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]"
       >
         Next →
       </PillButton>

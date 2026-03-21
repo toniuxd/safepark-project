@@ -72,7 +72,7 @@ const UserRegister = () => {
     <PageWrapper className="min-h-screen bg-[radial-gradient(circle_at_20%_0%,hsl(232_90%_12%)_0%,hsl(230_80%_7%)_45%,hsl(230_85%_5%)_100%)] px-0 py-0">
       <div className="mx-auto max-w-[390px] min-h-screen flex flex-col">
         <div className="h-16 px-5 flex items-center justify-between border-b border-white/5 bg-black/20">
-          <button onClick={() => navigate("/login")} className="text-sp-teal/90 hover:text-sp-teal transition-colors">
+          <button onClick={() => navigate("/index")} className="text-sp-teal/90 hover:text-sp-teal transition-colors">
             <ArrowLeft size={20} />
           </button>
           <span className="font-bold text-lg text-sp-teal tracking-[0.15em] uppercase">
@@ -174,7 +174,7 @@ const UserRegister = () => {
 
             <p className="text-center text-sm text-sp-text-secondary">
               Already have an account?{" "}
-              <Link to="/login" className="text-cyan-300 font-semibold">Sign in</Link>
+              <Link to="/index" className="text-cyan-300 font-semibold">Sign in</Link>
             </p>
           </div>
         </div>

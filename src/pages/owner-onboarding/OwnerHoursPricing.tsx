@@ -32,14 +32,14 @@ const OwnerHoursPricing = () => {
       </div>
 
       {/* Tab switcher */}
-      <div className="flex bg-sp-surface rounded-card p-1 border border-border">
+      <div className="flex bg-black/25 rounded-card p-1 border border-white/10">
         {(["hours", "pricing"] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={cn(
               "flex-1 py-2.5 rounded-[10px] text-sm font-semibold transition-colors flex items-center justify-center gap-1.5",
-              tab === t ? "bg-sp-teal text-foreground" : "text-sp-text-secondary"
+              tab === t ? "bg-cyan-300 text-slate-900" : "text-sp-text-secondary"
             )}
           >
             {t === "hours" ? <Clock size={14} /> : <DollarSign size={14} />}
@@ -53,7 +53,7 @@ const OwnerHoursPricing = () => {
           {days.map((day) => {
             const dh = lotDraft.hours[day];
             return (
-              <div key={day} className="bg-sp-surface rounded-card p-3 border border-border/50">
+              <div key={day} className="bg-black/25 rounded-card p-3 border border-white/10">
                 <div className="flex items-center justify-between">
                   <span className="text-foreground font-semibold text-sm w-10">{day}</span>
                   <button
@@ -72,14 +72,14 @@ const OwnerHoursPricing = () => {
                       type="time"
                       value={dh.open}
                       onChange={(e) => updateDay(day, { open: e.target.value })}
-                      className="flex-1 bg-background border border-border rounded-input px-3 py-2 text-sm text-foreground outline-none focus:border-sp-teal"
+                      className="flex-1 bg-black/25 border border-white/10 rounded-input px-3 py-2 text-sm text-foreground outline-none focus:border-sp-teal"
                     />
                     <span className="text-sp-text-secondary text-xs">to</span>
                     <input
                       type="time"
                       value={dh.close}
                       onChange={(e) => updateDay(day, { close: e.target.value })}
-                      className="flex-1 bg-background border border-border rounded-input px-3 py-2 text-sm text-foreground outline-none focus:border-sp-teal"
+                      className="flex-1 bg-black/25 border border-white/10 rounded-input px-3 py-2 text-sm text-foreground outline-none focus:border-sp-teal"
                     />
                   </div>
                 )}
@@ -100,6 +100,7 @@ const OwnerHoursPricing = () => {
               step={0.5}
               value={lotDraft.hourlyRate}
               onChange={(e) => updateLotDraft({ hourlyRate: +e.target.value })}
+              className="bg-black/25 border-white/10"
             />
           </div>
 
@@ -107,7 +108,7 @@ const OwnerHoursPricing = () => {
             <label className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary mb-2 block">Flat Rates</label>
             <div className="space-y-2">
               {lotDraft.flatRates.map((fr, i) => (
-                <div key={fr.duration} className="bg-sp-surface rounded-card p-3 border border-border/50 flex items-center gap-3">
+                <div key={fr.duration} className="bg-black/25 rounded-card p-3 border border-white/10 flex items-center gap-3">
                   <button
                     onClick={() => updateFlatRate(i, { enabled: !fr.enabled })}
                     className={cn(
@@ -135,7 +136,7 @@ const OwnerHoursPricing = () => {
             </div>
           </div>
 
-          <div className="bg-sp-surface rounded-card p-4 border border-border/50 space-y-3">
+          <div className="bg-black/25 rounded-card p-4 border border-white/10 space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <AlertTriangle size={16} className="text-sp-warning" />
@@ -168,7 +169,7 @@ const OwnerHoursPricing = () => {
       <PillButton
         variant="teal"
         onClick={() => { setStep(4); navigate("/owner/onboarding/payout"); }}
-        className="mt-auto"
+        className="mt-auto h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]"
       >
         Next →
       </PillButton>

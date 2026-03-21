@@ -1,0 +1,2 @@
+# SPA fallback (Netlify and similar). Serves index.html for client routes.
+/*    /index.html   200

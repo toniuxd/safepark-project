@@ -81,7 +81,14 @@ const CarVerification = () => {
 
   return (
     <>
-      <PageWrapper className="pb-24 space-y-4">
+      <PageWrapper className="min-h-screen bg-[radial-gradient(circle_at_20%_0%,hsl(232_90%_12%)_0%,hsl(230_80%_7%)_45%,hsl(230_85%_5%)_100%)] px-0 py-0 pb-24">
+        <div className="mx-auto max-w-[390px] min-h-screen flex flex-col">
+          <div className="h-16 px-5 flex items-center justify-between border-b border-white/5 bg-black/20">
+            <span className="font-bold text-lg text-sp-teal tracking-[0.15em] uppercase">SafePark</span>
+            <div className="w-5" />
+          </div>
+          <div className="px-5 pt-6 pb-8 flex-1">
+            <div className="rounded-[34px] border border-white/5 bg-[linear-gradient(180deg,rgba(25,33,89,0.55)_0%,rgba(12,16,42,0.82)_100%)] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.45)] space-y-4">
         {phase === "scan" && (
           <>
             {/* Viewfinder */}
@@ -117,10 +124,10 @@ const CarVerification = () => {
                   placeholder="ABC-1234"
                   value={plateInput}
                   onChange={(e) => setPlateInput(e.target.value.toUpperCase())}
-                  className="text-center text-lg font-bold tracking-wider"
+                  className="text-center text-lg font-bold tracking-wider bg-black/25 border-white/10"
                   autoFocus
                 />
-                <PillButton variant="teal" onClick={() => handleSubmitPlate(plateInput)} disabled={!plateInput.trim()}>
+                <PillButton variant="teal" onClick={() => handleSubmitPlate(plateInput)} disabled={!plateInput.trim()} className="h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]">
                   Verify Plate
                 </PillButton>
               </div>
@@ -128,7 +135,7 @@ const CarVerification = () => {
 
             {/* Simulated scan button (for demo) */}
             {!manualMode && (
-              <PillButton variant="teal" onClick={() => handleSubmitPlate(`TST-${Math.floor(1000 + Math.random() * 9000)}`)}>
+              <PillButton variant="teal" onClick={() => handleSubmitPlate(`TST-${Math.floor(1000 + Math.random() * 9000)}`)} className="h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]">
                 <ScanLine size={18} className="inline mr-2" /> Simulate Scan
               </PillButton>
             )}
@@ -209,7 +216,7 @@ const CarVerification = () => {
               🔄 Test Next State
             </button>
 
-            <GhostButton variant="teal" onClick={handleReset}>
+            <GhostButton variant="teal" onClick={handleReset} className="border-white/15">
               <ScanLine size={16} className="inline mr-2" /> Scan Another
             </GhostButton>
           </>
@@ -222,7 +229,7 @@ const CarVerification = () => {
             {scanLog.map((log, i) => {
               const lm = resultMeta[log.status];
               return (
-                <div key={i} className="bg-sp-surface rounded-card p-3 flex items-center gap-3 border border-border/50">
+                <div key={i} className="bg-black/25 rounded-card p-3 flex items-center gap-3 border border-white/10">
                   {lm.icon}
                   <div className="flex-1 min-w-0">
                     <p className="text-foreground font-semibold text-sm">{log.plate}</p>
@@ -236,12 +243,15 @@ const CarVerification = () => {
             })}
           </section>
         )}
+            </div>
+          </div>
+        </div>
       </PageWrapper>
 
       {/* Ticket Modal */}
       {ticketModal && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/50">
-          <div className="w-full max-w-[390px] bg-sp-surface rounded-t-[20px] p-6 space-y-4 animate-slide-up">
+          <div className="w-full max-w-[390px] bg-[linear-gradient(180deg,rgba(25,33,89,0.9)_0%,rgba(12,16,42,0.95)_100%)] border border-white/10 rounded-t-[20px] p-6 space-y-4 animate-slide-up">
             <div className="flex items-center justify-between">
               <h3 className="text-foreground font-bold text-lg">Issue Ticket</h3>
               <button onClick={() => setTicketModal(false)} className="text-sp-text-secondary">
@@ -251,7 +261,7 @@ const CarVerification = () => {
 
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary mb-1.5 block">Plate Number</label>
-              <InputField variant="teal" value={currentPlate} readOnly className="font-bold" />
+              <InputField variant="teal" value={currentPlate} readOnly className="font-bold bg-black/25 border-white/10" />
             </div>
 
             <div>
@@ -259,7 +269,7 @@ const CarVerification = () => {
               <select
                 value={ticketReason}
                 onChange={(e) => setTicketReason(e.target.value)}
-                className="w-full bg-background border border-border rounded-input px-4 py-3 text-foreground text-sm outline-none focus:border-sp-teal focus:ring-2 focus:ring-sp-teal"
+                className="w-full bg-black/25 border border-white/10 rounded-input px-4 py-3 text-foreground text-sm outline-none focus:border-sp-teal focus:ring-2 focus:ring-sp-teal"
               >
                 <option>Overtime parking</option>
                 <option>No valid session</option>
@@ -275,12 +285,13 @@ const CarVerification = () => {
                 type="number"
                 value={ticketAmount}
                 onChange={(e) => setTicketAmount(e.target.value)}
+                className="bg-black/25 border-white/10"
               />
             </div>
 
             <PillButton
               variant="teal"
-              className="bg-sp-warning"
+              className="h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]"
               onClick={() => {
                 setTicketModal(false);
                 handleReset();

@@ -33,7 +33,7 @@ const OwnerReview = () => {
         <p className="text-sp-text-secondary text-sm max-w-[280px]">
           Your lot listing is being reviewed. We'll notify you within 24 hours.
         </p>
-        <PillButton variant="teal" onClick={() => navigate("/owner/home")}>
+        <PillButton variant="teal" onClick={() => navigate("/owner/home")} className="h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]">
           Go to Dashboard →
         </PillButton>
       </div>
@@ -109,7 +109,7 @@ const OwnerReview = () => {
         <Row label="Schedule" value={lotDraft.payoutSchedule} />
       </Section>
 
-      <PillButton variant="teal" onClick={handleSubmit} className="mt-auto">
+      <PillButton variant="teal" onClick={handleSubmit} className="mt-auto h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]">
         <CheckCircle size={18} className="inline mr-2" />
         Submit for Approval
       </PillButton>
@@ -133,7 +133,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-sp-surface rounded-card border border-border/50 overflow-hidden">
+    <div className="bg-black/25 rounded-card border border-white/10 overflow-hidden">
       <button
         onClick={onToggle}
         className="w-full flex items-center gap-2 p-4 text-left"

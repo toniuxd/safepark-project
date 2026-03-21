@@ -64,7 +64,7 @@ const UserProfile = () => {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/index");
   };
 
   const deleteCar = (plate: string) => {

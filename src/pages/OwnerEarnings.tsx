@@ -58,14 +58,18 @@ const OwnerEarnings = () => {
 
   return (
     <>
-      <PageWrapper className="pb-24 space-y-5">
-        {/* Header */}
-        <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/owner/home")} className="text-sp-text-secondary">
-            <ArrowLeft size={22} />
-          </button>
-          <h1 className="text-foreground font-bold text-lg flex-1">Earnings</h1>
-        </div>
+      <PageWrapper className="min-h-screen bg-[radial-gradient(circle_at_20%_0%,hsl(232_90%_12%)_0%,hsl(230_80%_7%)_45%,hsl(230_85%_5%)_100%)] px-0 py-0 pb-24">
+        <div className="mx-auto max-w-[390px] min-h-screen flex flex-col">
+          <div className="h-16 px-5 flex items-center justify-between border-b border-white/5 bg-black/20">
+            <button onClick={() => navigate("/owner/home")} className="text-sp-teal/90 hover:text-sp-teal transition-colors">
+              <ArrowLeft size={20} />
+            </button>
+            <span className="font-bold text-lg text-sp-teal tracking-[0.15em] uppercase">SafePark</span>
+            <div className="w-5" />
+          </div>
+          <div className="px-5 pt-6 pb-8 flex-1">
+            <div className="rounded-[34px] border border-white/5 bg-[linear-gradient(180deg,rgba(25,33,89,0.55)_0%,rgba(12,16,42,0.82)_100%)] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.45)] space-y-5">
+              <h1 className="text-foreground font-bold text-lg">Earnings</h1>
 
         {/* Date chips */}
         <div className="flex gap-2">
@@ -76,8 +80,8 @@ const OwnerEarnings = () => {
               className={cn(
                 "px-3 py-2 rounded-pill text-xs font-semibold transition-colors",
                 range === c.key
-                  ? "bg-sp-teal text-foreground"
-                  : "bg-sp-surface text-sp-text-secondary border border-border"
+                  ? "bg-cyan-300 text-slate-900"
+                  : "bg-black/25 text-sp-text-secondary border border-white/10"
               )}
             >
               {c.label}
@@ -86,7 +90,7 @@ const OwnerEarnings = () => {
         </div>
 
         {/* Summary card */}
-        <div className="bg-sp-surface rounded-card p-5 border border-border/50 space-y-3">
+        <div className="bg-black/25 rounded-card p-5 border border-white/10 space-y-3">
           <div className="flex items-center gap-2 text-sp-teal">
             <TrendingUp size={18} />
             <span className="text-xs font-semibold uppercase tracking-wider">Summary</span>
@@ -109,7 +113,7 @@ const OwnerEarnings = () => {
 
         {/* Chart */}
         {chartDays > 1 && (
-          <div className="bg-sp-surface rounded-card p-4 border border-border/50">
+          <div className="bg-black/25 rounded-card p-4 border border-white/10">
             <p className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary mb-3">Daily Earnings</p>
             <ResponsiveContainer width="100%" height={180}>
               <BarChart data={chartData} barCategoryGap="20%">
@@ -137,7 +141,7 @@ const OwnerEarnings = () => {
             const lotGross = +(gross / lots.length + (Math.random() * 20 - 10)).toFixed(2);
             const lotNet = +(lotGross * (1 - PLATFORM_FEE)).toFixed(2);
             return (
-              <div key={lot.id} className="bg-sp-surface rounded-card p-4 border border-border/50 flex items-center gap-3">
+              <div key={lot.id} className="bg-black/25 rounded-card p-4 border border-white/10 flex items-center gap-3">
                 <div className="w-9 h-9 rounded-card bg-background flex items-center justify-center shrink-0">
                   <DollarSign size={16} className="text-sp-teal" />
                 </div>
@@ -157,7 +161,7 @@ const OwnerEarnings = () => {
             {mockTransactions.map((t, i) => {
               const tNet = +(t.gross * (1 - PLATFORM_FEE)).toFixed(2);
               return (
-                <div key={i} className="bg-sp-surface rounded-card p-3 flex items-center gap-3 border border-border/50">
+                <div key={i} className="bg-black/25 rounded-card p-3 flex items-center gap-3 border border-white/10">
                   <div className="flex-1 min-w-0">
                     <p className="text-foreground text-sm font-semibold">{t.plate}</p>
                     <p className="text-sp-text-secondary text-xs">{t.duration} · {t.time}</p>
@@ -177,7 +181,7 @@ const OwnerEarnings = () => {
           <h3 className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary">Payout History</h3>
           <div className="space-y-2">
             {mockPayouts.map((p, i) => (
-              <div key={i} className="bg-sp-surface rounded-card p-4 flex items-center justify-between border border-border/50">
+              <div key={i} className="bg-black/25 rounded-card p-4 flex items-center justify-between border border-white/10">
                 <div>
                   <p className="text-foreground text-sm font-semibold">${p.amount.toFixed(2)}</p>
                   <p className="text-sp-text-secondary text-xs">{p.date} · {p.ref}</p>
@@ -190,12 +194,15 @@ const OwnerEarnings = () => {
 
         {/* Export buttons */}
         <div className="flex gap-3">
-          <GhostButton variant="teal" className="flex items-center justify-center gap-2 text-sm">
+          <GhostButton variant="teal" className="flex items-center justify-center gap-2 text-sm border-white/15">
             <Download size={16} /> Export CSV
           </GhostButton>
-          <GhostButton variant="teal" className="flex items-center justify-center gap-2 text-sm">
+          <GhostButton variant="teal" className="flex items-center justify-center gap-2 text-sm border-white/15">
             <FileText size={16} /> Export PDF
           </GhostButton>
+        </div>
+            </div>
+          </div>
         </div>
       </PageWrapper>
       <BottomNav variant="owner" />

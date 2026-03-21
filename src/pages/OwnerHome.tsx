@@ -55,27 +55,30 @@ const OwnerHome = () => {
 
   return (
     <>
-      <PageWrapper className="pb-24 space-y-5">
-        {/* Header */}
-        <header className="flex items-center justify-between">
-          <span className="font-bold text-lg text-sp-teal tracking-wide uppercase">SafePark</span>
-          <div className="flex items-center gap-3">
-            <button className="relative text-sp-text-secondary">
-              <Bell size={20} />
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-destructive rounded-full" />
-            </button>
-            <div className="w-9 h-9 rounded-full bg-sp-surface border border-border flex items-center justify-center">
-              <User size={16} className="text-sp-text-secondary" />
+      <PageWrapper className="min-h-screen bg-[radial-gradient(circle_at_20%_0%,hsl(232_90%_12%)_0%,hsl(230_80%_7%)_45%,hsl(230_85%_5%)_100%)] px-0 py-0 pb-24">
+        <div className="mx-auto max-w-[390px] min-h-screen flex flex-col">
+          <header className="h-16 px-5 flex items-center justify-between border-b border-white/5 bg-black/20">
+            <span className="font-bold text-lg text-sp-teal tracking-[0.15em] uppercase">SafePark</span>
+            <div className="flex items-center gap-3">
+              <button className="relative text-sp-text-secondary">
+                <Bell size={20} />
+                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-destructive rounded-full" />
+              </button>
+              <div className="w-9 h-9 rounded-full bg-black/25 border border-white/10 flex items-center justify-center">
+                <User size={16} className="text-sp-text-secondary" />
+              </div>
             </div>
-          </div>
-        </header>
+          </header>
+
+          <div className="px-5 pt-6 pb-8 flex-1">
+            <div className="rounded-[34px] border border-white/5 bg-[linear-gradient(180deg,rgba(25,33,89,0.55)_0%,rgba(12,16,42,0.82)_100%)] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.45)] space-y-5">
 
         {/* Stats */}
         <div className="flex gap-3">
           {stats.map((s) => (
             <div
               key={s.label}
-              className="flex-1 bg-sp-surface rounded-card p-3 border border-border/50 space-y-1"
+              className="flex-1 bg-black/25 rounded-card p-3 border border-white/10 space-y-1"
             >
               <span className="text-sp-teal">{s.icon}</span>
               <p className="text-foreground font-bold text-lg leading-none">{s.value}</p>
@@ -92,7 +95,7 @@ const OwnerHome = () => {
             const pct = Math.round((occ / lot.totalSpots) * 100);
             const isOpen = lotOpen[lot.id] ?? true;
             return (
-              <div key={lot.id} className="bg-sp-surface rounded-card p-4 border border-border/50 space-y-3">
+              <div key={lot.id} className="bg-black/25 rounded-card p-4 border border-white/10 space-y-3">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-foreground font-semibold text-sm">{lot.name}</p>
@@ -151,7 +154,7 @@ const OwnerHome = () => {
           <h3 className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary">Recent Activity</h3>
           <div className="space-y-2">
             {mockRecentActivity.map((r, i) => (
-              <div key={i} className="bg-sp-surface rounded-card p-3 flex items-center gap-3 border border-border/50">
+              <div key={i} className="bg-black/25 rounded-card p-3 flex items-center gap-3 border border-white/10">
                 <div className="w-9 h-9 rounded-card bg-background flex items-center justify-center shrink-0">
                   <Car size={16} className="text-sp-teal" />
                 </div>
@@ -164,14 +167,17 @@ const OwnerHome = () => {
             ))}
           </div>
         </section>
+            </div>
+          </div>
+        </div>
       </PageWrapper>
 
       {/* FAB */}
       <button
         onClick={() => navigate("/owner/verify")}
-        className="fixed bottom-20 right-[calc(50%-195px+16px)] w-14 h-14 rounded-full bg-sp-teal flex items-center justify-center shadow-lg shadow-sp-teal/30 active:scale-95 transition-transform z-40"
+        className="fixed bottom-20 right-[calc(50%-195px+16px)] w-14 h-14 rounded-full bg-gradient-to-r from-cyan-300 to-cyan-400 flex items-center justify-center shadow-[0_0_24px_rgba(34,211,238,0.35)] active:scale-95 transition-transform z-40"
       >
-        <ScanLine size={22} className="text-foreground" />
+        <ScanLine size={22} className="text-slate-900" />
       </button>
 
       <BottomNav variant="owner" />

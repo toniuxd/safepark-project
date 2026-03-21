@@ -2,8 +2,29 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const envUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+const envKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
+
+/** True when real project env vars are set (deploy / local .env). */
+export const isSupabaseConfigured = Boolean(envUrl && envKey);
+
+/**
+ * Supabase throws at init if URL/key are missing — that would white-screen the whole app
+ * before React mounts (common when env vars are not set on the host).
+ * Use inert placeholders so the UI loads; auth/API calls will fail until vars are configured.
+ */
+const SUPABASE_URL =
+  envUrl ||
+  'https://placeholder.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY =
+  envKey ||
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsYWNlaG9sZGVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2MDAwMDAwMDAsImV4cCI6MTkwMDAwMDAwMH0.placeholder';
+
+if (import.meta.env.DEV && !isSupabaseConfigured) {
+  console.warn(
+    '[SafePark] Missing VITE_SUPABASE_URL or VITE_SUPABASE_PUBLISHABLE_KEY — using placeholder Supabase client. Set env vars for auth to work.'
+  );
+}
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";

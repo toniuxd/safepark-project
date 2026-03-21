@@ -39,8 +39,9 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
-          <Route path="/login" element={<UserLogin />} />
+          <Route path="/" element={<Navigate to="/index" replace />} />
+          <Route path="/login" element={<Navigate to="/index" replace />} />
+          <Route path="/index" element={<UserLogin />} />
           <Route path="/register" element={<UserRegister />} />
           <Route path="/onboarding" element={<UserOnboarding />}>
             <Route path="verify-email" element={<VerifyEmail />} />

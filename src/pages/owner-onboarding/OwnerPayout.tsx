@@ -35,7 +35,7 @@ const OwnerPayout = () => {
             "w-full rounded-card p-5 text-left border-2 transition-colors active:scale-[0.98]",
             payoutMethod === "bank"
               ? "border-sp-teal bg-sp-teal/10"
-              : "border-border bg-sp-surface"
+              : "border-white/10 bg-black/25"
           )}
         >
           <div className="flex items-center gap-3 mb-2">
@@ -49,11 +49,11 @@ const OwnerPayout = () => {
           <div className="space-y-3 pl-2 animate-fade-in">
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary mb-1.5 block">Routing Number</label>
-              <InputField variant="teal" placeholder="021000021" value={routingNumber} onChange={(e) => updateLotDraft({ routingNumber: e.target.value })} />
+              <InputField variant="teal" placeholder="021000021" value={routingNumber} onChange={(e) => updateLotDraft({ routingNumber: e.target.value })} className="bg-black/25 border-white/10" />
             </div>
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary mb-1.5 block">Account Number</label>
-              <InputField variant="teal" placeholder="•••• •••• 1234" value={accountNumber} onChange={(e) => updateLotDraft({ accountNumber: e.target.value })} />
+              <InputField variant="teal" placeholder="•••• •••• 1234" value={accountNumber} onChange={(e) => updateLotDraft({ accountNumber: e.target.value })} className="bg-black/25 border-white/10" />
             </div>
           </div>
         )}
@@ -64,7 +64,7 @@ const OwnerPayout = () => {
             "w-full rounded-card p-5 text-left border-2 transition-colors active:scale-[0.98]",
             payoutMethod === "stripe"
               ? "border-sp-teal bg-sp-teal/10"
-              : "border-border bg-sp-surface"
+              : "border-white/10 bg-black/25"
           )}
         >
           <div className="flex items-center gap-3 mb-2">
@@ -73,7 +73,7 @@ const OwnerPayout = () => {
           </div>
           <p className="text-sp-text-secondary text-xs">Fast payouts via Stripe Connect.</p>
           {payoutMethod === "stripe" && (
-            <div className="mt-3 bg-sp-surface border border-border rounded-card p-3 text-center">
+            <div className="mt-3 bg-black/25 border border-white/10 rounded-card p-3 text-center">
               <button className="text-sp-teal font-bold text-sm">Connect Stripe Account →</button>
             </div>
           )}
@@ -91,8 +91,8 @@ const OwnerPayout = () => {
               className={cn(
                 "flex-1 py-3 rounded-card text-sm font-semibold transition-colors active:scale-[0.98]",
                 payoutSchedule === s.key
-                  ? "bg-sp-teal text-foreground"
-                  : "bg-sp-surface text-sp-text-secondary border border-border"
+                  ? "bg-cyan-300 text-slate-900"
+                  : "bg-black/25 text-sp-text-secondary border border-white/10"
               )}
             >
               {s.label}
@@ -105,7 +105,7 @@ const OwnerPayout = () => {
         variant="teal"
         onClick={() => { setStep(5); navigate("/owner/onboarding/review"); }}
         disabled={!valid}
-        className="mt-auto"
+        className="mt-auto h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]"
       >
         Save & Review →
       </PillButton>

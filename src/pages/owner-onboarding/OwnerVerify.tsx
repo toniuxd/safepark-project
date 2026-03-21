@@ -60,7 +60,7 @@ const OwnerVerify = () => {
 
   return (
     <div className="flex flex-col items-center gap-6 flex-1">
-      <div className="w-14 h-14 rounded-card bg-sp-surface flex items-center justify-center text-sp-teal">
+      <div className="w-14 h-14 rounded-card bg-cyan-900/40 border border-cyan-300/20 flex items-center justify-center text-cyan-300">
         {icon}
       </div>
       <div className="text-center">
@@ -79,7 +79,7 @@ const OwnerVerify = () => {
             value={d}
             onChange={(e) => handleChange(i, e.target.value)}
             onKeyDown={(e) => handleKey(i, e)}
-            className="w-12 h-14 text-center text-xl font-bold bg-sp-surface border border-border rounded-input text-foreground focus:border-sp-teal focus:ring-2 focus:ring-sp-teal outline-none transition-colors"
+            className="w-12 h-14 text-center text-xl font-bold bg-black/25 border border-white/10 rounded-input text-foreground focus:border-sp-teal focus:ring-2 focus:ring-sp-teal outline-none transition-colors"
           />
         ))}
       </div>
@@ -93,7 +93,7 @@ const OwnerVerify = () => {
       </p>
 
       <div className="w-full space-y-3 mt-auto">
-        <PillButton variant="teal" onClick={handleVerify} disabled={!filled}>
+        <PillButton variant="teal" onClick={handleVerify} disabled={!filled} className="h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]">
           Verify & Continue
         </PillButton>
       </div>
