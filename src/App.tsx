@@ -7,6 +7,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import UserLogin from "./pages/UserLogin";
 import UserRegister from "./pages/UserRegister";
 import UserOnboarding from "./pages/UserOnboarding";
+import VerifyEmail from "./pages/onboarding/VerifyEmail";
+import VerifyPhone from "./pages/onboarding/VerifyPhone";
+import AddCar from "./pages/onboarding/AddCar";
+import AddPayment from "./pages/onboarding/AddPayment";
+import OnboardingComplete from "./pages/onboarding/OnboardingComplete";
 import UserHome from "./pages/UserHome";
 import ParkingFlow from "./pages/ParkingFlow";
 import ParkingHistory from "./pages/ParkingHistory";
@@ -32,7 +37,13 @@ const App = () => (
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<UserLogin />} />
           <Route path="/register" element={<UserRegister />} />
-          <Route path="/onboarding/*" element={<UserOnboarding />} />
+          <Route path="/onboarding" element={<UserOnboarding />}>
+            <Route path="verify-email" element={<VerifyEmail />} />
+            <Route path="verify-phone" element={<VerifyPhone />} />
+            <Route path="add-car" element={<AddCar />} />
+            <Route path="add-payment" element={<AddPayment />} />
+            <Route path="complete" element={<OnboardingComplete />} />
+          </Route>
           <Route path="/home" element={<UserHome />} />
           <Route path="/parking/:lotId" element={<ParkingFlow />} />
           <Route path="/history" element={<ParkingHistory />} />
