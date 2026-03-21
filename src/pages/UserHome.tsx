@@ -44,11 +44,11 @@ const UserHome = () => {
   };
 
   return (
-    <div className="mx-auto max-w-[390px] min-h-screen bg-background relative flex flex-col">
+    <div className="mx-auto max-w-[390px] min-h-screen bg-[radial-gradient(circle_at_20%_0%,hsl(232_90%_12%)_0%,hsl(230_80%_7%)_45%,hsl(230_85%_5%)_100%)] relative flex flex-col">
       {/* Map hero + header overlay */}
       <div className="relative h-[320px] shrink-0 overflow-hidden">
         {/* Dark map placeholder */}
-        <div className="absolute inset-0 bg-[hsl(222,47%,8%)]">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,14,40,0.95)_0%,rgba(7,11,28,0.98)_100%)]">
           {/* Faux map grid lines */}
           <svg className="w-full h-full opacity-[0.12]" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -73,7 +73,7 @@ const UserHome = () => {
       </div>
 
       {/* Bottom sheet card */}
-      <div className="relative z-10 -mt-16 flex-1 bg-sp-surface rounded-t-[28px] px-5 pt-3 pb-24 space-y-5 overflow-y-auto">
+      <div className="relative z-10 -mt-16 flex-1 rounded-t-[28px] border border-white/5 bg-[linear-gradient(180deg,rgba(25,33,89,0.55)_0%,rgba(12,16,42,0.82)_100%)] px-5 pt-3 pb-24 space-y-5 overflow-y-auto">
         {/* Drag handle */}
         <div className="flex justify-center">
           <div className="w-10 h-1 rounded-full bg-sp-text-secondary/40" />
@@ -81,7 +81,7 @@ const UserHome = () => {
 
         {/* Ticket Alert */}
         {activeTicket && (
-          <div className="bg-destructive/15 border border-destructive/30 rounded-card p-4 flex items-center gap-3 animate-fade-in">
+          <div className="bg-destructive/15 border border-destructive/30 rounded-card p-4 flex items-center gap-3 animate-fade-in backdrop-blur-sm">
             <AlertTriangle className="text-sp-warning shrink-0" size={22} />
             <div className="flex-1 min-w-0">
               <p className="text-foreground text-sm font-semibold">
@@ -112,21 +112,21 @@ const UserHome = () => {
             <div className="relative flex-1">
               <Search
                 className="absolute left-3 top-1/2 -translate-y-1/2 text-sp-text-secondary"
-                size={18}
+                size={16}
               />
               <InputField
                 placeholder="Where are you going?"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                className="pl-10"
+                className="h-11 pl-9 pr-3 py-2 text-sm bg-black/25 border-white/10 rounded-[12px]"
               />
             </div>
             <button
               onClick={handleSearch}
-              className="w-12 h-12 bg-background border border-border rounded-card flex items-center justify-center shrink-0"
+              className="w-11 h-11 bg-black/25 border border-white/10 rounded-[12px] flex items-center justify-center shrink-0"
             >
-              <SlidersHorizontal size={18} className="text-sp-text-secondary" />
+              <SlidersHorizontal size={16} className="text-sp-text-secondary" />
             </button>
           </div>
 
@@ -165,7 +165,7 @@ const UserHome = () => {
                 <div
                   key={s.id}
                   onClick={() => navigate(`/parking/${s.lotId || s.id}`)}
-                  className="min-w-[240px] bg-background rounded-card p-4 space-y-3 shrink-0 border border-border/50 cursor-pointer active:scale-[0.98] transition-transform"
+                  className="min-w-[240px] bg-black/25 rounded-card p-4 space-y-3 shrink-0 border border-white/10 cursor-pointer active:scale-[0.98] transition-transform"
                 >
                   <div className="flex items-start justify-between">
                     <div className="w-10 h-10 rounded-full bg-sp-teal/15 flex items-center justify-center">
@@ -186,7 +186,7 @@ const UserHome = () => {
                 <div
                   key={`lot-${lot.id}`}
                   onClick={() => navigate(`/parking/${lot.id}`)}
-                  className="min-w-[240px] bg-background rounded-card p-4 space-y-3 shrink-0 border border-border/50 cursor-pointer active:scale-[0.98] transition-transform"
+                  className="min-w-[240px] bg-black/25 rounded-card p-4 space-y-3 shrink-0 border border-white/10 cursor-pointer active:scale-[0.98] transition-transform"
                 >
                   <div className="flex items-start justify-between">
                     <div className="w-10 h-10 rounded-full bg-sp-teal/15 flex items-center justify-center">
@@ -220,7 +220,7 @@ const UserHome = () => {
                 <button
                   key={lot.id}
                   onClick={() => navigate(`/parking/${lot.id}`)}
-                  className="w-full bg-background rounded-card p-4 flex items-center gap-3 border border-border/50 text-left active:scale-[0.98] transition-transform"
+                  className="w-full bg-black/25 rounded-card p-4 flex items-center gap-3 border border-white/10 text-left active:scale-[0.98] transition-transform"
                 >
                   <div className="w-10 h-10 rounded-full bg-sp-blue/15 flex items-center justify-center shrink-0">
                     <Zap size={18} className="text-sp-blue" />
@@ -249,7 +249,7 @@ const UserHome = () => {
               <button
                 key={lot.id}
                 onClick={() => navigate(`/parking/${lot.id}`)}
-                className="w-full bg-background rounded-card p-4 flex items-center gap-3 border border-border/50 text-left active:scale-[0.98] transition-transform"
+                className="w-full bg-black/25 rounded-card p-4 flex items-center gap-3 border border-white/10 text-left active:scale-[0.98] transition-transform"
               >
                 <div className="w-10 h-10 rounded-full bg-sp-teal/15 flex items-center justify-center shrink-0">
                   <MapPin size={18} className="text-sp-teal" />
@@ -276,7 +276,7 @@ const UserHome = () => {
             {cars.map((car, i) => (
               <div
                 key={i}
-                className="bg-background rounded-card p-4 flex items-center gap-3 border border-border/50"
+                className="bg-black/25 rounded-card p-4 flex items-center gap-3 border border-white/10"
               >
                 <div className="w-10 h-10 rounded-full bg-sp-blue/15 flex items-center justify-center shrink-0">
                   <Car size={18} className="text-sp-blue" />
@@ -293,7 +293,7 @@ const UserHome = () => {
             ))}
             <button
               onClick={() => navigate("/onboarding/add-car")}
-              className="w-full bg-background rounded-card p-4 flex items-center justify-center gap-2 border border-dashed border-border text-sp-blue font-semibold text-sm active:scale-[0.98] transition-transform"
+              className="w-full bg-black/25 rounded-card p-4 flex items-center justify-center gap-2 border border-dashed border-white/10 text-sp-blue font-semibold text-sm active:scale-[0.98] transition-transform"
             >
               <Plus size={16} /> Add Car
             </button>
@@ -307,9 +307,9 @@ const UserHome = () => {
           const el = document.querySelector("input");
           el?.focus();
         }}
-        className="fixed bottom-20 right-[calc(50%-195px+16px)] z-40 w-14 h-14 rounded-full bg-sp-teal flex items-center justify-center shadow-lg shadow-sp-teal/30 active:scale-95 transition-transform"
+        className="fixed bottom-20 right-[calc(50%-195px+16px)] z-40 w-14 h-14 rounded-full bg-gradient-to-r from-cyan-300 to-cyan-400 flex items-center justify-center shadow-[0_0_24px_rgba(34,211,238,0.35)] active:scale-95 transition-transform"
       >
-        <Car size={22} className="text-background" />
+        <Car size={22} className="text-slate-900" />
       </button>
 
       <BottomNav variant="user" />
