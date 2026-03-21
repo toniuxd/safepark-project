@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 interface CarState {
-  cars: never[];
+  cars: unknown[];
 }
 
 export const useCarStore = create<CarState>()(() => ({

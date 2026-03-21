@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 interface LotState {
-  lots: never[];
-  selectedLot: null;
+  lots: unknown[];
+  selectedLot: unknown | null;
 }
 
 export const useLotStore = create<LotState>()(() => ({

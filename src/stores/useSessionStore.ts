@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 interface SessionState {
-  activeSessions: never[];
-  parkingHistory: never[];
+  activeSessions: unknown[];
+  parkingHistory: unknown[];
 }
 
 export const useSessionStore = create<SessionState>()(() => ({
