@@ -20,6 +20,11 @@ import TicketPayment from "./pages/TicketPayment";
 import OwnerLogin from "./pages/OwnerLogin";
 import OwnerRegister from "./pages/OwnerRegister";
 import OwnerOnboarding from "./pages/OwnerOnboarding";
+import OwnerVerify from "./pages/owner-onboarding/OwnerVerify";
+import OwnerLotDetails from "./pages/owner-onboarding/OwnerLotDetails";
+import OwnerHoursPricing from "./pages/owner-onboarding/OwnerHoursPricing";
+import OwnerPayout from "./pages/owner-onboarding/OwnerPayout";
+import OwnerReview from "./pages/owner-onboarding/OwnerReview";
 import OwnerHome from "./pages/OwnerHome";
 import OwnerEarnings from "./pages/OwnerEarnings";
 import CarVerification from "./pages/CarVerification";
@@ -51,7 +56,13 @@ const App = () => (
           <Route path="/ticket/:ticketId" element={<TicketPayment />} />
           <Route path="/owner/login" element={<OwnerLogin />} />
           <Route path="/owner/register" element={<OwnerRegister />} />
-          <Route path="/owner/onboarding/*" element={<OwnerOnboarding />} />
+          <Route path="/owner/onboarding" element={<OwnerOnboarding />}>
+            <Route path="verify" element={<OwnerVerify />} />
+            <Route path="lot-details" element={<OwnerLotDetails />} />
+            <Route path="hours-pricing" element={<OwnerHoursPricing />} />
+            <Route path="payout" element={<OwnerPayout />} />
+            <Route path="review" element={<OwnerReview />} />
+          </Route>
           <Route path="/owner/home" element={<OwnerHome />} />
           <Route path="/owner/earnings" element={<OwnerEarnings />} />
           <Route path="/owner/verify" element={<CarVerification />} />
