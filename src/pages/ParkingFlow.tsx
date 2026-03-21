@@ -5,6 +5,7 @@ import { useCarStore, CarEntry } from "@/stores/useCarStore";
 import { useSessionStore } from "@/stores/useSessionStore";
 import PageWrapper from "@/components/safepark/PageWrapper";
 import PillButton from "@/components/safepark/PillButton";
+import UserHeader from "@/components/safepark/UserHeader";
 import { toast } from "sonner";
 import {
   Car,
@@ -258,41 +259,43 @@ const ParkingFlow = () => {
   const isLast = step === 3;
 
   return (
-    <PageWrapper className="flex flex-col min-h-screen relative">
-      {/* Dark map placeholder top area */}
-      <div className="flex-1" />
-
-      {/* Bottom sheet */}
-      <div
-        key={step}
-        className="bg-card rounded-t-[24px] p-5 pb-8 space-y-5 animate-slide-up"
-      >
-        {/* Drag handle */}
-        <div className="flex justify-center">
-          <div className="w-10 h-1 rounded-full bg-border" />
-        </div>
-
-        {cards[step]}
-
-        <div className="space-y-3 pt-2">
-          {isLast ? (
-            <PillButton onClick={confirm}>
-              Confirm & Pay <ArrowRight size={18} className="inline ml-1" />
-            </PillButton>
-          ) : (
-            <PillButton
-              onClick={() => setStep((s) => s + 1)}
-              disabled={step === 0 && selectedCar === null}
-            >
-              Next <ArrowRight size={18} className="inline ml-1" />
-            </PillButton>
-          )}
-          <button
-            onClick={() => (step === 0 ? navigate(-1) : setStep((s) => s - 1))}
-            className="w-full text-center text-sp-text-secondary text-sm font-medium"
+    <PageWrapper className="min-h-screen bg-[radial-gradient(circle_at_20%_0%,hsl(232_90%_12%)_0%,hsl(230_80%_7%)_45%,hsl(230_85%_5%)_100%)] px-0 py-0">
+      <div className="mx-auto max-w-[390px] min-h-screen flex flex-col">
+        <UserHeader />
+        <div className="px-5 pt-6 pb-8 flex-1">
+          <div
+            key={step}
+            className="rounded-[34px] border border-white/5 bg-[linear-gradient(180deg,rgba(25,33,89,0.55)_0%,rgba(12,16,42,0.82)_100%)] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.45)] space-y-5 animate-slide-up"
           >
-            {step === 0 ? "Cancel" : "Back"}
-          </button>
+            {/* Drag handle */}
+            <div className="flex justify-center">
+              <div className="w-10 h-1 rounded-full bg-border" />
+            </div>
+
+            {cards[step]}
+
+            <div className="space-y-3 pt-2">
+              {isLast ? (
+                <PillButton onClick={confirm} className="h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]">
+                  Confirm & Pay <ArrowRight size={18} className="inline ml-1" />
+                </PillButton>
+              ) : (
+                <PillButton
+                  onClick={() => setStep((s) => s + 1)}
+                  disabled={step === 0 && selectedCar === null}
+                  className="h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]"
+                >
+                  Next <ArrowRight size={18} className="inline ml-1" />
+                </PillButton>
+              )}
+              <button
+                onClick={() => (step === 0 ? navigate(-1) : setStep((s) => s - 1))}
+                className="w-full text-center text-sp-text-secondary text-sm font-medium"
+              >
+                {step === 0 ? "Cancel" : "Back"}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </PageWrapper>

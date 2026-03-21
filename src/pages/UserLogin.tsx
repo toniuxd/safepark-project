@@ -47,8 +47,10 @@ const UserLogin = () => {
           >
             <ArrowLeft size={20} />
           </button>
-          <span className="font-bold text-[30px] text-sp-teal leading-none">SafePark</span>
-          <span className="text-sp-teal font-bold text-xs uppercase tracking-[0.25em]">Sentinel</span>
+          <span className="font-bold text-lg text-sp-teal tracking-[0.15em] uppercase">
+            SafePark
+          </span>
+          <div className="w-5" />
         </div>
 
         <div className="px-5 pt-6 pb-8 flex-1">

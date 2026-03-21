@@ -74,63 +74,69 @@ const ParkingHistory = () => {
 
   return (
     <>
-      <PageWrapper className="pb-24 space-y-5">
-        <UserHeader />
-        <h1 className="text-title text-foreground">Parking History</h1>
+      <PageWrapper className="min-h-screen bg-[radial-gradient(circle_at_20%_0%,hsl(232_90%_12%)_0%,hsl(230_80%_7%)_45%,hsl(230_85%_5%)_100%)] px-0 py-0 pb-24">
+        <div className="mx-auto max-w-[390px] min-h-screen flex flex-col">
+          <UserHeader />
+          <div className="px-5 pt-6 pb-8 flex-1">
+            <div className="rounded-[34px] border border-white/5 bg-[linear-gradient(180deg,rgba(25,33,89,0.55)_0%,rgba(12,16,42,0.82)_100%)] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.45)] space-y-5">
+              <h1 className="text-title text-foreground">Parking History</h1>
 
-        {/* Date chips */}
-        <div className="flex gap-2">
-          {dateFilters.map((f) => (
-            <button
-              key={f.key}
-              onClick={() => setDateFilter(f.key)}
-              className={cn(
-                "px-4 py-2 rounded-pill text-xs font-semibold transition-colors",
-                dateFilter === f.key
-                  ? "bg-sp-blue text-foreground"
-                  : "bg-sp-surface text-sp-text-secondary border border-border"
+              {/* Date chips */}
+              <div className="flex gap-2">
+                {dateFilters.map((f) => (
+                  <button
+                    key={f.key}
+                    onClick={() => setDateFilter(f.key)}
+                    className={cn(
+                      "px-4 py-2 rounded-pill text-xs font-semibold transition-colors",
+                      dateFilter === f.key
+                        ? "bg-cyan-300 text-slate-900"
+                        : "bg-black/25 text-sp-text-secondary border border-white/10"
+                    )}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Status chips */}
+              <div className="flex gap-2">
+                {statusFilters.map((f) => (
+                  <button
+                    key={f.key}
+                    onClick={() => setStatusFilter(f.key)}
+                    className={cn(
+                      "px-3 py-1.5 rounded-pill text-xs font-semibold transition-colors",
+                      statusFilter === f.key
+                        ? "bg-sp-teal text-foreground"
+                        : "bg-black/25 text-sp-text-secondary border border-white/10"
+                    )}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Sessions */}
+              {filtered.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-16 gap-3 text-sp-text-secondary">
+                  <Inbox size={48} strokeWidth={1.2} />
+                  <p className="text-sm font-medium">No parking history yet.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {filtered.map((s) => (
+                    <SessionCard
+                      key={s.id}
+                      session={s}
+                      onExtend={() => setExtendModal(s.id)}
+                    />
+                  ))}
+                </div>
               )}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Status chips */}
-        <div className="flex gap-2">
-          {statusFilters.map((f) => (
-            <button
-              key={f.key}
-              onClick={() => setStatusFilter(f.key)}
-              className={cn(
-                "px-3 py-1.5 rounded-pill text-xs font-semibold transition-colors",
-                statusFilter === f.key
-                  ? "bg-sp-teal text-foreground"
-                  : "bg-sp-surface text-sp-text-secondary border border-border"
-              )}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Sessions */}
-        {filtered.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-16 gap-3 text-sp-text-secondary">
-            <Inbox size={48} strokeWidth={1.2} />
-            <p className="text-sm font-medium">No parking history yet.</p>
+            </div>
           </div>
-        ) : (
-          <div className="space-y-3">
-            {filtered.map((s) => (
-              <SessionCard
-                key={s.id}
-                session={s}
-                onExtend={() => setExtendModal(s.id)}
-              />
-            ))}
-          </div>
-        )}
+        </div>
 
         {/* Extend modal (UI only) */}
         {extendModal && (

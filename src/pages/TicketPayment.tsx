@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PageWrapper from "@/components/safepark/PageWrapper";
 import PillButton from "@/components/safepark/PillButton";
+import UserHeader from "@/components/safepark/UserHeader";
 import { useSessionStore } from "@/stores/useSessionStore";
 import {
   AlertTriangle,
@@ -27,12 +28,17 @@ const TicketPayment = () => {
 
   if (!activeTicket) {
     return (
-      <PageWrapper className="flex flex-col items-center justify-center gap-4">
-        <CheckCircle size={48} className="text-sp-teal" />
-        <p className="text-foreground font-bold text-lg">No outstanding tickets</p>
-        <PillButton onClick={() => navigate("/home")} className="max-w-[200px]">
-          Back to Home
-        </PillButton>
+      <PageWrapper className="min-h-screen bg-[radial-gradient(circle_at_20%_0%,hsl(232_90%_12%)_0%,hsl(230_80%_7%)_45%,hsl(230_85%_5%)_100%)] px-0 py-0">
+        <div className="mx-auto max-w-[390px] min-h-screen flex flex-col">
+          <UserHeader />
+          <div className="px-5 pt-6 pb-8 flex-1 flex flex-col items-center justify-center gap-4">
+            <CheckCircle size={48} className="text-sp-teal" />
+            <p className="text-foreground font-bold text-lg">No outstanding tickets</p>
+            <PillButton onClick={() => navigate("/home")} className="max-w-[200px] h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]">
+              Back to Home
+            </PillButton>
+          </div>
+        </div>
       </PageWrapper>
     );
   }
@@ -41,42 +47,52 @@ const TicketPayment = () => {
 
   if (paid) {
     return (
-      <PageWrapper className="flex flex-col items-center justify-center gap-6 text-center">
-        <div className="w-20 h-20 rounded-full bg-sp-teal/20 flex items-center justify-center animate-pulse">
-          <CheckCircle size={40} className="text-sp-teal" />
+      <PageWrapper className="min-h-screen bg-[radial-gradient(circle_at_20%_0%,hsl(232_90%_12%)_0%,hsl(230_80%_7%)_45%,hsl(230_85%_5%)_100%)] px-0 py-0">
+        <div className="mx-auto max-w-[390px] min-h-screen flex flex-col">
+          <UserHeader />
+          <div className="px-5 pt-6 pb-8 flex-1">
+            <div className="rounded-[34px] border border-white/5 bg-[linear-gradient(180deg,rgba(25,33,89,0.55)_0%,rgba(12,16,42,0.82)_100%)] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.45)] flex flex-col items-center justify-center gap-6 text-center h-full">
+              <div className="w-20 h-20 rounded-full bg-sp-teal/20 flex items-center justify-center animate-pulse">
+                <CheckCircle size={40} className="text-sp-teal" />
+              </div>
+              <div className="space-y-2">
+                <h1 className="text-title text-foreground">Ticket Paid</h1>
+                <p className="text-sp-text-secondary text-sm">
+                  Your parking ticket has been resolved successfully.
+                </p>
+              </div>
+              <div className="bg-black/25 rounded-card p-4 w-full space-y-2 border border-white/10">
+                <p className="text-sp-text-secondary text-xs uppercase font-semibold tracking-wider">
+                  Confirmation Number
+                </p>
+                <p className="text-foreground font-mono text-lg font-bold">{confirmNumber}</p>
+                <p className="text-sp-text-secondary text-xs">
+                  Amount: ${total.toFixed(2)}
+                </p>
+              </div>
+              <PillButton onClick={() => navigate("/home")} className="h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]">Back to Home</PillButton>
+            </div>
+          </div>
         </div>
-        <div className="space-y-2">
-          <h1 className="text-title text-foreground">Ticket Paid</h1>
-          <p className="text-sp-text-secondary text-sm">
-            Your parking ticket has been resolved successfully.
-          </p>
-        </div>
-        <div className="bg-sp-surface rounded-card p-4 w-full space-y-2 border border-border/50">
-          <p className="text-sp-text-secondary text-xs uppercase font-semibold tracking-wider">
-            Confirmation Number
-          </p>
-          <p className="text-foreground font-mono text-lg font-bold">{confirmNumber}</p>
-          <p className="text-sp-text-secondary text-xs">
-            Amount: ${total.toFixed(2)}
-          </p>
-        </div>
-        <PillButton onClick={() => navigate("/home")}>Back to Home</PillButton>
       </PageWrapper>
     );
   }
 
   return (
-    <PageWrapper className="space-y-5">
-      {/* Header */}
-      <div className="flex items-center gap-3">
-        <button
-          onClick={() => navigate(-1)}
-          className="w-10 h-10 rounded-card bg-sp-surface border border-border flex items-center justify-center"
-        >
-          <ArrowLeft size={18} className="text-sp-text-secondary" />
-        </button>
-        <h1 className="text-foreground font-bold text-lg">Pay Ticket</h1>
-      </div>
+    <PageWrapper className="min-h-screen bg-[radial-gradient(circle_at_20%_0%,hsl(232_90%_12%)_0%,hsl(230_80%_7%)_45%,hsl(230_85%_5%)_100%)] px-0 py-0">
+      <div className="mx-auto max-w-[390px] min-h-screen flex flex-col">
+        <UserHeader />
+        <div className="px-5 pt-6 pb-8 flex-1">
+          <div className="rounded-[34px] border border-white/5 bg-[linear-gradient(180deg,rgba(25,33,89,0.55)_0%,rgba(12,16,42,0.82)_100%)] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.45)] space-y-5">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => navigate(-1)}
+                className="w-10 h-10 rounded-card bg-black/25 border border-white/10 flex items-center justify-center"
+              >
+                <ArrowLeft size={18} className="text-sp-text-secondary" />
+              </button>
+              <h1 className="text-foreground font-bold text-lg">Pay Ticket</h1>
+            </div>
 
       {/* Ticket Summary */}
       <div className="bg-destructive/10 border border-destructive/30 rounded-card p-5 space-y-4">
@@ -164,15 +180,19 @@ const TicketPayment = () => {
         </div>
       </section>
 
-      <PillButton
-        onClick={() => {
-          payTicket(confirmNumber);
-          setPaid(true);
-        }}
-        disabled={!selectedPm}
-      >
-        Pay Now — ${total.toFixed(2)}
-      </PillButton>
+            <PillButton
+              onClick={() => {
+                payTicket(confirmNumber);
+                setPaid(true);
+              }}
+              disabled={!selectedPm}
+              className="h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]"
+            >
+              Pay Now — ${total.toFixed(2)}
+            </PillButton>
+          </div>
+        </div>
+      </div>
     </PageWrapper>
   );
 };
