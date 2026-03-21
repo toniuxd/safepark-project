@@ -1,9 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import PageWrapper from "@/components/safepark/PageWrapper";
 import BottomNav from "@/components/safepark/BottomNav";
 import InputField from "@/components/safepark/InputField";
-import PillButton from "@/components/safepark/PillButton";
 import { useSessionStore } from "@/stores/useSessionStore";
 import { useLotStore, mockLots } from "@/stores/useLotStore";
 import { useCarStore } from "@/stores/useCarStore";
@@ -47,23 +45,51 @@ const UserHome = () => {
   };
 
   return (
-    <>
-      <PageWrapper className="pb-24 space-y-6">
-        {/* Header */}
-        <header className="flex items-center justify-between">
+    <div className="mx-auto max-w-[390px] min-h-screen bg-background relative flex flex-col">
+      {/* Map hero + header overlay */}
+      <div className="relative h-[320px] shrink-0 overflow-hidden">
+        {/* Dark map placeholder */}
+        <div className="absolute inset-0 bg-[hsl(222,47%,8%)]">
+          {/* Faux map grid lines */}
+          <svg className="w-full h-full opacity-[0.12]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="hsl(var(--sp-teal))" strokeWidth="0.5" />
+              </pattern>
+              <pattern id="roads" width="120" height="120" patternUnits="userSpaceOnUse">
+                <line x1="0" y1="60" x2="120" y2="60" stroke="hsl(var(--sp-teal))" strokeWidth="1.2" />
+                <line x1="60" y1="0" x2="60" y2="120" stroke="hsl(var(--sp-teal))" strokeWidth="1.2" />
+                <line x1="0" y1="30" x2="120" y2="90" stroke="hsl(var(--sp-teal))" strokeWidth="0.4" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            <rect width="100%" height="100%" fill="url(#roads)" />
+          </svg>
+        </div>
+
+        {/* Header overlay */}
+        <header className="relative z-10 flex items-center justify-between px-5 pt-6">
           <div className="flex items-center gap-3">
             <Menu className="text-sp-text-secondary" size={22} />
-            <span className="font-bold text-lg text-sp-teal tracking-wide uppercase">
+            <span className="font-bold text-lg text-sp-teal tracking-[0.15em] uppercase">
               SafePark
             </span>
           </div>
           <button
             onClick={() => navigate("/profile")}
-            className="w-10 h-10 rounded-full bg-sp-surface border border-border flex items-center justify-center"
+            className="w-11 h-11 rounded-full bg-sp-surface border-2 border-sp-teal/30 flex items-center justify-center overflow-hidden"
           >
             <User size={18} className="text-sp-text-secondary" />
           </button>
         </header>
+      </div>
+
+      {/* Bottom sheet card */}
+      <div className="relative z-10 -mt-16 flex-1 bg-sp-surface rounded-t-[28px] px-5 pt-3 pb-24 space-y-5 overflow-y-auto">
+        {/* Drag handle */}
+        <div className="flex justify-center">
+          <div className="w-10 h-1 rounded-full bg-sp-text-secondary/40" />
+        </div>
 
         {/* Ticket Alert */}
         {activeTicket && (
@@ -71,7 +97,7 @@ const UserHome = () => {
             <AlertTriangle className="text-sp-warning shrink-0" size={22} />
             <div className="flex-1 min-w-0">
               <p className="text-foreground text-sm font-semibold">
-                Unpaid Parking Ticket: Action Required
+                Unpaid Parking Ticket
               </p>
               <p className="text-sp-text-secondary text-xs truncate">
                 {activeTicket.plate} · {activeTicket.reason} · ${activeTicket.amount}
@@ -87,7 +113,7 @@ const UserHome = () => {
         )}
 
         {/* Search section */}
-        <div className="space-y-3">
+        <div className="space-y-4">
           <h2 className="text-title text-foreground leading-tight">
             Find parking
             <br />
@@ -110,7 +136,7 @@ const UserHome = () => {
             </div>
             <button
               onClick={handleSearch}
-              className="w-12 h-12 bg-sp-surface border border-border rounded-input flex items-center justify-center shrink-0"
+              className="w-12 h-12 bg-background border border-border rounded-card flex items-center justify-center shrink-0"
             >
               <SlidersHorizontal size={18} className="text-sp-text-secondary" />
             </button>
@@ -140,24 +166,43 @@ const UserHome = () => {
           </div>
         </div>
 
-        {/* Favourite Lots — horizontal scroll */}
-        {favouriteLots.length > 0 && (
+        {/* Recently Used — horizontal scroll */}
+        {recentLots.length > 0 && (
           <section className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary">
-                Favourites
-              </h3>
-              <Heart size={14} className="text-sp-teal" />
-            </div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary">
+              Recently Used
+            </h3>
             <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-hide">
-              {favouriteLots.map((lot) => (
+              {recentLots.map((s) => (
                 <div
-                  key={lot.id}
-                  className="min-w-[260px] bg-sp-surface rounded-card p-4 space-y-3 shrink-0 border border-border/50"
+                  key={s.id}
+                  onClick={() => navigate(`/parking/${s.lotId || s.id}`)}
+                  className="min-w-[240px] bg-background rounded-card p-4 space-y-3 shrink-0 border border-border/50 cursor-pointer active:scale-[0.98] transition-transform"
                 >
                   <div className="flex items-start justify-between">
-                    <div className="w-10 h-10 rounded-card bg-background flex items-center justify-center">
-                      <Zap size={18} className="text-sp-blue" />
+                    <div className="w-10 h-10 rounded-full bg-sp-teal/15 flex items-center justify-center">
+                      <Zap size={18} className="text-sp-teal" />
+                    </div>
+                    <span className="text-sp-teal text-xs font-semibold">
+                      0.4 miles
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-foreground font-bold">{s.lotName}</p>
+                    <p className="text-sp-text-secondary text-xs">{s.lotAddress}</p>
+                  </div>
+                </div>
+              ))}
+              {/* Show lots as additional cards if few recent */}
+              {lots.slice(0, 2).map((lot) => (
+                <div
+                  key={`lot-${lot.id}`}
+                  onClick={() => navigate(`/parking/${lot.id}`)}
+                  className="min-w-[240px] bg-background rounded-card p-4 space-y-3 shrink-0 border border-border/50 cursor-pointer active:scale-[0.98] transition-transform"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="w-10 h-10 rounded-full bg-sp-teal/15 flex items-center justify-center">
+                      <ShieldCheck size={18} className="text-sp-teal" />
                     </div>
                     <span className="text-sp-teal text-xs font-semibold">
                       {lot.distance}
@@ -167,54 +212,46 @@ const UserHome = () => {
                     <p className="text-foreground font-bold">{lot.name}</p>
                     <p className="text-sp-text-secondary text-xs">{lot.address}</p>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sp-text-secondary text-xs">
-                      {lot.availableSpots}/{lot.totalSpots} spots · ${lot.hourlyRate}/hr
-                    </span>
-                    <button
-                      onClick={() => navigate(`/parking/${lot.id}`)}
-                      className="text-xs font-bold text-sp-blue"
-                    >
-                      Park Here →
-                    </button>
-                  </div>
                 </div>
               ))}
             </div>
           </section>
         )}
 
-        {/* Recently Used */}
-        {recentLots.length > 0 && (
+        {/* Favourite Lots */}
+        {favouriteLots.length > 0 && (
           <section className="space-y-3">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary">
-              Recently Used
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary">
+                Favourites
+              </h3>
+              <Heart size={14} className="text-sp-teal" />
+            </div>
             <div className="space-y-2">
-              {recentLots.map((s) => (
-                <div
-                  key={s.id}
-                  className="bg-sp-surface rounded-card p-4 flex items-center gap-3 border border-border/50"
+              {favouriteLots.map((lot) => (
+                <button
+                  key={lot.id}
+                  onClick={() => navigate(`/parking/${lot.id}`)}
+                  className="w-full bg-background rounded-card p-4 flex items-center gap-3 border border-border/50 text-left active:scale-[0.98] transition-transform"
                 >
-                  <div className="w-10 h-10 rounded-card bg-background flex items-center justify-center shrink-0">
-                    <Clock size={18} className="text-sp-blue" />
+                  <div className="w-10 h-10 rounded-full bg-sp-blue/15 flex items-center justify-center shrink-0">
+                    <Zap size={18} className="text-sp-blue" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-foreground font-semibold text-sm truncate">
-                      {s.lotName}
-                    </p>
-                    <p className="text-sp-text-secondary text-xs truncate">
-                      {s.lotAddress}
-                    </p>
+                    <p className="text-foreground font-semibold text-sm truncate">{lot.name}</p>
+                    <p className="text-sp-text-secondary text-xs truncate">{lot.address}</p>
                   </div>
-                  <span className="text-sp-teal text-sm font-bold">${s.total.toFixed(2)}</span>
-                </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-sp-teal text-sm font-bold">${lot.hourlyRate}/hr</p>
+                    <p className="text-sp-text-secondary text-xs">{lot.availableSpots} spots</p>
+                  </div>
+                </button>
               ))}
             </div>
           </section>
         )}
 
-        {/* All Lots */}
+        {/* Nearby Lots */}
         <section className="space-y-3">
           <h3 className="text-xs font-semibold uppercase tracking-wider text-sp-text-secondary">
             Nearby Lots
@@ -224,24 +261,18 @@ const UserHome = () => {
               <button
                 key={lot.id}
                 onClick={() => navigate(`/parking/${lot.id}`)}
-                className="w-full bg-sp-surface rounded-card p-4 flex items-center gap-3 border border-border/50 text-left active:scale-[0.98] transition-transform"
+                className="w-full bg-background rounded-card p-4 flex items-center gap-3 border border-border/50 text-left active:scale-[0.98] transition-transform"
               >
-                <div className="w-10 h-10 rounded-card bg-background flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-full bg-sp-teal/15 flex items-center justify-center shrink-0">
                   <MapPin size={18} className="text-sp-teal" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-foreground font-semibold text-sm truncate">
-                    {lot.name}
-                  </p>
-                  <p className="text-sp-text-secondary text-xs truncate">
-                    {lot.address}
-                  </p>
+                  <p className="text-foreground font-semibold text-sm truncate">{lot.name}</p>
+                  <p className="text-sp-text-secondary text-xs truncate">{lot.address}</p>
                 </div>
                 <div className="text-right shrink-0">
                   <p className="text-sp-teal text-sm font-bold">${lot.hourlyRate}/hr</p>
-                  <p className="text-sp-text-secondary text-xs">
-                    {lot.availableSpots} spots
-                  </p>
+                  <p className="text-sp-text-secondary text-xs">{lot.availableSpots} spots</p>
                 </div>
               </button>
             ))}
@@ -257,9 +288,9 @@ const UserHome = () => {
             {cars.map((car, i) => (
               <div
                 key={i}
-                className="bg-sp-surface rounded-card p-4 flex items-center gap-3 border border-border/50"
+                className="bg-background rounded-card p-4 flex items-center gap-3 border border-border/50"
               >
-                <div className="w-10 h-10 rounded-card bg-background flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-full bg-sp-blue/15 flex items-center justify-center shrink-0">
                   <Car size={18} className="text-sp-blue" />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -274,15 +305,27 @@ const UserHome = () => {
             ))}
             <button
               onClick={() => navigate("/onboarding/add-car")}
-              className="w-full bg-sp-surface rounded-card p-4 flex items-center justify-center gap-2 border border-dashed border-border text-sp-blue font-semibold text-sm active:scale-[0.98] transition-transform"
+              className="w-full bg-background rounded-card p-4 flex items-center justify-center gap-2 border border-dashed border-border text-sp-blue font-semibold text-sm active:scale-[0.98] transition-transform"
             >
               <Plus size={16} /> Add Car
             </button>
           </div>
         </section>
-      </PageWrapper>
+      </div>
+
+      {/* FAB — Find Parking */}
+      <button
+        onClick={() => {
+          const el = document.querySelector("input");
+          el?.focus();
+        }}
+        className="fixed bottom-20 right-[calc(50%-195px+16px)] z-40 w-14 h-14 rounded-full bg-sp-teal flex items-center justify-center shadow-lg shadow-sp-teal/30 active:scale-95 transition-transform"
+      >
+        <Car size={22} className="text-background" />
+      </button>
+
       <BottomNav variant="user" />
-    </>
+    </div>
   );
 };
 
