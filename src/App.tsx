@@ -17,6 +17,8 @@ import ParkingFlow from "./pages/ParkingFlow";
 import ParkingHistory from "./pages/ParkingHistory";
 import UserProfile from "./pages/UserProfile";
 import TicketPayment from "./pages/TicketPayment";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import OwnerLogin from "./pages/OwnerLogin";
 import OwnerRegister from "./pages/OwnerRegister";
 import OwnerOnboarding from "./pages/OwnerOnboarding";
