@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { backendClient as supabase } from "@/lib/backendClient";
 import { useAuthStore } from "@/stores/useAuthStore";
 import PageWrapper from "@/components/safepark/PageWrapper";
 import InputField from "@/components/safepark/InputField";
