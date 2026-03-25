@@ -17,6 +17,8 @@ import ParkingFlow from "./pages/ParkingFlow";
 import ParkingHistory from "./pages/ParkingHistory";
 import UserProfile from "./pages/UserProfile";
 import TicketPayment from "./pages/TicketPayment";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import OwnerLogin from "./pages/OwnerLogin";
 import OwnerRegister from "./pages/OwnerRegister";
 import OwnerOnboarding from "./pages/OwnerOnboarding";
@@ -43,6 +45,8 @@ const App = () => (
           <Route path="/login" element={<Navigate to="/index" replace />} />
           <Route path="/index" element={<UserLogin />} />
           <Route path="/register" element={<UserRegister />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/onboarding" element={<UserOnboarding />}>
             <Route path="verify-email" element={<VerifyEmail />} />
             <Route path="verify-phone" element={<VerifyPhone />} />
