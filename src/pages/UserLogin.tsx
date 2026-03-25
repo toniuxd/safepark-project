@@ -61,14 +61,6 @@ const UserLogin = () => {
               </div>
               <h1 className="text-title text-foreground">Welcome Back</h1>
               <p className="text-sp-text-secondary text-sm">Sign in to continue your secure parking flow.</p>
-              {!isSupabaseConfigured && (
-                <p className="text-amber-200/90 text-xs text-left rounded-xl bg-amber-500/10 border border-amber-400/25 p-3 mt-3">
-                  Sign-in needs Supabase env on this host: set{" "}
-                  <code className="text-[10px] bg-black/30 px-1 rounded">VITE_SUPABASE_URL</code> and{" "}
-                  <code className="text-[10px] bg-black/30 px-1 rounded">VITE_SUPABASE_PUBLISHABLE_KEY</code>{" "}
-                  (e.g. in your deployment dashboard), then redeploy.
-                </p>
-              )}
             </div>
 
             {/* Form */}
