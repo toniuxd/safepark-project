@@ -38,13 +38,24 @@ const VerifyEmail = () => {
 
   const filled = otp.every((d) => d !== "");
 
-  const verify = () => {
-    // Accept any 6 digits for now
-    if (filled) {
-      setEmailVerified(true);
-      setStep(2);
-      navigate("/onboarding/verify-phone");
+  const verify = async () => {
+    if (!filled) return;
+
+    const token = otp.join("");
+    const { error: verifyError } = await supabase.auth.verifyOtp({
+      email: "",
+      token,
+      type: "email",
+    });
+
+    if (verifyError) {
+      setError(verifyError.message);
+      return;
     }
+
+    setEmailVerified(true);
+    setStep(2);
+    navigate("/onboarding/verify-phone");
   };
 
   const mins = Math.floor(countdown / 60);
