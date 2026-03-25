@@ -122,9 +122,9 @@ const UserLogin = () => {
                   />
                   Remember me
                 </label>
-                <button type="button" className="text-sm text-sp-blue">
+                <Link to="/forgot-password" className="text-sm text-sp-blue">
                   Forgot password?
-                </button>
+                </Link>
               </div>
 
               <PillButton

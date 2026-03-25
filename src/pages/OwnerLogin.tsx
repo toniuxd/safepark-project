@@ -108,9 +108,9 @@ const OwnerLogin = () => {
                   />
                   Remember me
                 </label>
-                <button type="button" className="text-sm text-sp-teal">
+                <Link to="/forgot-password" className="text-sm text-sp-teal">
                   Forgot password?
-                </button>
+                </Link>
               </div>
 
               <PillButton variant="teal" onClick={handleLogin} disabled={!email || !password || loading} className="h-14 bg-gradient-to-r from-cyan-300 to-cyan-400 text-slate-900 shadow-[0_0_24px_rgba(34,211,238,0.35)]">
