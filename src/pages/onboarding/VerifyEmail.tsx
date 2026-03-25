@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { backendClient as supabase } from "@/lib/backendClient";
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
 import PillButton from "@/components/safepark/PillButton";
 import { ArrowRight } from "lucide-react";
